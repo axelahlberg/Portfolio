@@ -1,8 +1,12 @@
 /*
 
-Campus Data Exploration
+Skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, Creating Views, Converting Data Types
 
-Skills used: Joins and Aggregate Functions
+*/
+
+/*
+
+Campus Data Exploration
 
 */
 
@@ -31,8 +35,6 @@ where undergraduate > 0 and graduate > 0
 /*
 
 Covid 19 Data Exploration 
-
-Skills used: Joins, Aliases, Aggregate Functions, and Data Type Conversions
 
 */
 
