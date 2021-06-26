@@ -32,6 +32,8 @@ select avg(undergraduate/graduate) as ugratio
 from discipline_enrollments
 where undergraduate > 0 and graduate > 0 
 
+-- CSU Dataset Retrieved from: http://users.csc.calpoly.edu/~dekhtyar/365-Winter2015/index.html
+
 /*
 
 Covid 19 Data Exploration 
