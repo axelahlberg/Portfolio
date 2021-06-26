@@ -10,7 +10,7 @@ Campus Data Exploration
 
 */
 
--- Outputs campuses and respective number of degrees issued during the year of 2004 in descending order
+-- Campuses with their respective number of degrees issued during the year of 2004
 
 select campuses.campus, degrees.degrees
 from campuses
@@ -18,7 +18,7 @@ inner join degrees on campuses.id=degrees.campus
 where degrees.year = '2004' 
 order by degrees.degrees desc
 
--- Outputs the top 3 most expensive campuses and their campus fees for the year 2004
+-- Top 3 most expensive campuses and their campus fees for the year 2004
 
 select top 3 campuses.campus, campusfee
 from campuses
