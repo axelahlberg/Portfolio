@@ -1,8 +1,8 @@
+Skills used: Joins, Aggregate Functions, Converting Data Types, Windows Functions, CTE's, Temp Tables, and views
+
 /*
 
 Campus Data Exploration
-
-Skills used: Joins and Aggregate Functions
 
 */
 
@@ -35,8 +35,6 @@ where undergraduate > 0 and graduate > 0
 /*
 
 Covid 19 Data Exploration 
-
-Skills used: Joins, Aliases, Aggregate Functions, and Data Type Conversions
 
 */
 
@@ -78,5 +76,67 @@ where continent is not null
 group by continent
 order by totaldeathcount desc
 
+-- Shows percentage of population that has recieved at least one covid vaccine
+	
+select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
+, sum(convert(int,vac.new_vaccinations)) over (partition by dea.location order by dea.location, dea.date) as rollingpeoplevaccinated
+from portfolioproject..coviddeaths dea
+join portfolioproject..covidvaccinations vac
+on dea.location = vac.location
+and dea.date = vac.date
+where dea.continent is not null 
+order by 2,3
+	
+-- CTE to perform calculation on partition by in previous query
+	
+with popvsvac (continent, location, date, population, new_vaccinations, rollingpeoplevaccinated)
+as
+(
+select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
+, sum(convert(int,vac.new_vaccinations)) over (partition by dea.location order by dea.location, dea.date) as rollingpeoplevaccinated
+from portfolioproject..coviddeaths dea
+join portfolioproject..covidvaccinations vac
+on dea.location = vac.location
+and dea.date = vac.date
+where dea.continent is not null 
+)
+select *, (rollingpeoplevaccinated/population)*100
+from popvsvac
+	
+-- Temp table to perform calculation on partition by in previous query
+	
+drop table if exists #percentpopulationvaccinated -- For possible edits of the temp table
+create table #percentpopulationvaccinated
+(
+continent nvarchar(255),
+location nvarchar(255),
+date datetime,
+population numeric,
+new_vaccinations numeric,
+rollingpeoplevaccinated numeric
+)
+	
+insert into #percentpopulationvaccinated
+select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
+, sum(convert(int,vac.new_vaccinations)) over (partition by dea.location order by dea.location, dea.date) as rollingpeoplevaccinated
+from portfolioproject..coviddeaths dea
+join portfolioproject..covidvaccinations vac
+on dea.location = vac.location
+and dea.date = vac.date
+
+select *, (rollingpeoplevaccinated/population)*100
+from #percentpopulationvaccinated
+	
+-- Creation of a view
+	
+create view percentpopulationvaccinated as
+select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
+, sum(convert(int,vac.new_vaccinations)) over (partition by dea.location order by dea.location, dea.date) as rollingpeoplevaccinated
+from portfolioproject..coviddeaths dea
+join portfolioproject..covidvaccinations vac
+on dea.location = vac.location
+and dea.date = vac.date
+where dea.continent is not null 
+	
 -- Dataset: https://ourworldindata.org/covid-deaths
 
