@@ -82,8 +82,8 @@ order by totaldeathcount desc
 	
 select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
 , sum(convert(int,vac.new_vaccinations)) over (partition by dea.location order by dea.location, dea.date) as rollingpeoplevaccinated
-from portfolioproject..coviddeaths dea
-join portfolioproject..covidvaccinations vac
+from coviddeaths dea
+join covidvaccinations vac
 on dea.location = vac.location
 and dea.date = vac.date
 where dea.continent is not null 
@@ -96,8 +96,8 @@ as
 (
 select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
 , sum(convert(int,vac.new_vaccinations)) over (partition by dea.location order by dea.location, dea.date) as rollingpeoplevaccinated
-from portfolioproject..coviddeaths dea
-join portfolioproject..covidvaccinations vac
+from coviddeaths dea
+join covidvaccinations vac
 on dea.location = vac.location
 and dea.date = vac.date
 where dea.continent is not null 
@@ -121,8 +121,8 @@ rollingpeoplevaccinated numeric
 insert into #percentpopulationvaccinated
 select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
 , sum(convert(int,vac.new_vaccinations)) over (partition by dea.location order by dea.location, dea.date) as rollingpeoplevaccinated
-from portfolioproject..coviddeaths dea
-join portfolioproject..covidvaccinations vac
+from coviddeaths dea
+join covidvaccinations vac
 on dea.location = vac.location
 and dea.date = vac.date
 
@@ -134,8 +134,8 @@ from #percentpopulationvaccinated
 create view percentpopulationvaccinated as
 select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
 , sum(convert(int,vac.new_vaccinations)) over (partition by dea.location order by dea.location, dea.date) as rollingpeoplevaccinated
-from portfolioproject..coviddeaths dea
-join portfolioproject..covidvaccinations vac
+from coviddeaths dea
+join covidvaccinations vac
 on dea.location = vac.location
 and dea.date = vac.date
 where dea.continent is not null 
