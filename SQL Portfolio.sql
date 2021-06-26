@@ -1,6 +1,6 @@
 /*
 
-Skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, Views, and Data Type Conversions
+Skills used: Joins, CTE's, Temp Tables, Window Functions, Aggregate Functions, Views, and Data Type Conversions
 
 */
 
