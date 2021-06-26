@@ -1,0 +1,47 @@
+/*
+
+Covid 19 Data Exploration 
+
+Skills used: Joins, Aggregate Functions, and Converting Data Types
+
+*/
+
+-- The likelihood of dying if you happen to contract covid in finland
+
+Select Location, date, total_cases,total_deaths, (total_deaths/total_cases)*100 as DeathPercentage
+From CovidDeaths
+Where location like '%finland%'
+and continent is not null 
+order by 1,2
+
+-- The percentage of the population in finland got infected with covid
+
+Select Location, date, Population, total_cases,  (total_cases/population)*100 as PercentPopulationInfected
+From CovidDeaths
+Where location like '%finland%'
+order by 1,2
+
+-- Countries with highest infection rate in comparison to its population
+
+Select Location, Population, MAX(total_cases) as HighestInfectionCount,  Max((total_cases/population))*100 as PercentPopulationInfected
+From CovidDeaths
+Group by Location, Population
+order by PercentPopulationInfected desc
+
+-- Countries with highest death count per population
+
+Select Location, MAX(cast(Total_deaths as int)) as TotalDeathCount
+From CovidDeaths
+Where continent is not null 
+Group by Location
+order by TotalDeathCount desc
+
+-- Contintents with the highest death count per population
+
+Select continent, MAX(cast(Total_deaths as int)) as TotalDeathCount
+From CovidDeaths
+Where continent is not null 
+Group by continent
+order by TotalDeathCount desc
+
+-- Dataset: https://ourworldindata.org/covid-deaths
