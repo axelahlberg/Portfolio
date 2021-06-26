@@ -32,7 +32,7 @@ select avg(undergraduate/graduate) as ugratio
 from discipline_enrollments
 where undergraduate > 0 and graduate > 0 
 
--- CSU Dataset Retrieved from: http://users.csc.calpoly.edu/~dekhtyar/365-Winter2015/index.html
+-- CSU dataset retrieved from: http://users.csc.calpoly.edu/~dekhtyar/365-Winter2015/index.html
 
 /*
 
@@ -140,5 +140,5 @@ on dea.location = vac.location
 and dea.date = vac.date
 where dea.continent is not null 
 	
--- Dataset: https://ourworldindata.org/covid-deaths
+-- Dataset retrieved from: https://ourworldindata.org/covid-deaths
 
