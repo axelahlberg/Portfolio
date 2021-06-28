@@ -1,7 +1,7 @@
 /*
 
 Let's imagine we have 2 tables named EmployeeDemographics and EmployeeSalarya that we want to join together.
-Let us further suppose that we want to create and store a procedure that outputs the the
+Let us further suppose that we want to create and store a procedure that outputs the
 number of employees with the jobtitle we input, their average age, and their average salary.
 The following procedure can be created, stored, and later called to fulfill that puspose.
  
@@ -34,3 +34,4 @@ GO;
 
 exec Temp_Employee @jobtitle = 'Salesman'
 exec Temp_Employee @jobtitle = 'Accountant'
+
