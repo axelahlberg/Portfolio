@@ -1,6 +1,6 @@
-### SQL Portfolio
+### Portfolio
 
-SQL code I've used in the past for various projects and for ones own learning. Please feel free to use the code if you find something useful. 
+SQL and Python code I've used in the past for various projects and for ones own learning. Please feel free to use the code if you find something useful. 
 
 - 🌱 I’m currently learning NoSQL, Hadoop, Cloud Computing (AWS), Bash Scripting, and MongoDB
 
